@@ -14,7 +14,7 @@ object Primes {
 
   def getPrimeFactors(n: Int) = {
     val primes = getAllPrimesLessThanN(n/2)
-    primes.filter( isFactor(n, _))
+    primes.filter( Factors.isFactor(n, _))
   }
 
   def getNthPrime: Stream[Int] = {
@@ -24,18 +24,12 @@ object Primes {
    }
 
   def getNthLargestPrimeFactor(n: Int) = {
-    lazy val ps: Stream[Int] = (n/2 until 2).toStream.filter(i =>
-      isFactor(n,i) && isPrime(i))
+    lazy val ps: Stream[Int] = Stream.range(n/2,2,-1).filter(i =>
+      Factors.isFactor(n,i) && isPrime(i))
     ps
   }
 
-  private def isFactor(n: Int, factor: Int) =  (n % factor == 0)
 
-  def getNthLargestFactor(n: Int) = {
-    lazy val ps: Stream[Int] = (n/2 until 2).toStream.filter(i =>
-      isFactor(n,i) )
-    ps
-  }
 
 }
 

@@ -7,27 +7,20 @@ import org.specs2.runner.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class PrimesSpec extends Specification {
 
-//  "testIsPrime" ! testIsPrime
-//  "testIsPrimeFalse" ! testIsPrimeFalse
-//  "testPrimeFactors" ! testPrimeFactors
-//  "testLargestPrimeFactor" ! testLargestPrimeFactor
-  "testLargestFactor" ! testLargestFactor
-  "testNthPrime" ! testNthPrime
-
-  def testIsPrime = {
+  "testIsPrime" ! {
     Primes.isPrime(2) mustEqual true
     Primes.isPrime(3) mustEqual true
     Primes.isPrime(5) mustEqual true
     Primes.isPrime(239) mustEqual true
   }
 
-  def testIsPrimeFalse = {
+  "testIsPrimeFalse" !  {
     Primes.isPrime(4) mustEqual false
     Primes.isPrime(81) mustEqual false
     Primes.isPrime(444444444) mustEqual false
   }
 
-  def testPrimeFactors = {
+   "test prime factors" ! {
     Primes.getPrimeFactors(100).toList mustEqual  List(2,5)
     Primes.getPrimeFactors(100000).toList mustEqual  List(2,5)
     Primes.getPrimeFactors(27).toList mustEqual  List(3)
@@ -35,27 +28,25 @@ class PrimesSpec extends Specification {
   }
 
 
-  def testLargestPrimeFactor = {
-    println(Primes.getNthLargestPrimeFactor(210))
-
+  "testLargestPrimeFactor" ! {
+    // test the first one
     Primes.getNthLargestPrimeFactor(210).take(1).head mustEqual(7)
-    //Primes.getNthLargestPrimeFactor(210).take(3).head mustEqual(3)
+
+    }
+
+  "test 3rd largest prime factor " ! {
+      Primes.getNthLargestPrimeFactor(210).take(3).toList.last mustEqual(3)
+  }
+
+  "get 4th largest prime factor when there are only 3" ! {
+    // There are only 3 prime factors so taking 4 should still give us a length of 3
+    Primes.getNthLargestPrimeFactor(210).take(4).toList.length mustEqual(3)
+
   }
 
 
-  def testLargestFactor = {
-    println(Primes.getNthLargestFactor(210))
-
-    Primes.getNthLargestFactor(210).take(1).head mustEqual(105)
-    //Primes.getNthLargestPrimeFactor(210).take(3).head mustEqual(3)
-  }
-
-
-  def testNthPrime = {
+  "testNthPrime" ! {
     Primes.getNthPrime.take(1).head mustEqual(2)
-
-    Primes.getNthPrime.take(2).toList.last mustEqual(3)
-
     Primes.getNthPrime.take(4).toList.last mustEqual(7)
 
   }
