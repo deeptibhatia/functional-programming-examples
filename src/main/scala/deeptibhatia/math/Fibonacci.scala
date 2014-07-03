@@ -1,4 +1,4 @@
-package deeptibhatia.euler.math
+package deeptibhatia.math
 
 /**
  * Created by dbhatia on 6/28/14.
